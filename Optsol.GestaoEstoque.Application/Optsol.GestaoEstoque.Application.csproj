@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="11.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Optsol.GestaoEstoque.Dominio\Optsol.GestaoEstoque.Dominio.csproj" />
+    <ProjectReference Include="..\Optsol.GestaoEstoque.Infra\Optsol.GestaoEstoque.Infra.csproj" />
+  </ItemGroup>
+
+</Project>
