@@ -13,5 +13,6 @@ namespace Optsol.GestaoEstoque.Dominio.Repositorios
         ICollection<Produto> OrdenarProdutoId();
         void EditarProdutoId(Produto produto);
         void RemoverProdutoDeposito(Deposito deposito);
+        Produto TransferirProduto(int depositoId, int produtoId);
     }
 }

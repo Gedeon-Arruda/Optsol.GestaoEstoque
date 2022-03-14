@@ -10,9 +10,9 @@
         public Deposito Deposito { get; set; }
         public int? DepositoId { get; set; }
         public Venda Venda { get; set; }
-        public int? VendaId { get; set; }    
+        public int? VendaId { get; set; }
 
-        public Produto() 
+        public Produto()
         {
         }
 
@@ -32,6 +32,12 @@
             CodigoVenda = codigoVenda;
             Deposito = deposito;
             DepositoId = deposito.Id;
+        }
+
+        public void AlterarDeposito(Deposito deposito)
+        {
+            Deposito = deposito;
+            DepositoId = Deposito.Id;
         }
     }
 }

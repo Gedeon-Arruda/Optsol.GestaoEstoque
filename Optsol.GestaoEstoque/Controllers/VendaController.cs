@@ -7,7 +7,7 @@ using System.Collections.Generic;
 namespace Optsol.GestaoEstoque.Controllers
 {
     [ApiController]
-    [Route("api/venda")]
+    [Route("api/vendas")]
     public class VendaController : ControllerBase
     {
         public IVendaServiceApplication aplicacao;

@@ -33,7 +33,9 @@ namespace Optsol.GestaoEstoque.Application.Services
 
             depositoRepository.Inserir(deposito);
 
-            return deposito.Id;
+            var depositoVw = mapper.Map<DepositoViewModel>(deposito);
+
+            return depositoVw.Id;
         }
 
         public void DeletarDepositoId(int id)

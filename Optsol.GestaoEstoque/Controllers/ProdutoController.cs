@@ -6,7 +6,7 @@ using System;
 namespace Optsol.GestaoEstoque.Controllers
 {
     [ApiController]
-    [Route("api/produto")]
+    [Route("api/produtos")]
     public class ProdutoController : ControllerBase
     {
         public IProdutoServiceApplication aplicacao;
@@ -16,6 +16,7 @@ namespace Optsol.GestaoEstoque.Controllers
             aplicacao = aplicacaoParametro;
         }
 
+        /// <summary> Busca lista de produtos </summary>
         [HttpGet]
         public IActionResult ObterProdutos()
         {
@@ -66,7 +67,7 @@ namespace Optsol.GestaoEstoque.Controllers
             }
         }
 
-        [HttpGet("ProdutosOrdenadosId")]
+        [HttpGet("produtos-ordenados")]
         public IActionResult OrdenarProdutoId()
         {
             var ordenarProduto = aplicacao.OrdenarProduto();
@@ -85,10 +86,10 @@ namespace Optsol.GestaoEstoque.Controllers
             catch (Exception)
             {
                 return BadRequest();
-            }            
+            }
         }
 
-        [HttpDelete("{depositoId}/Produto/{produtoId}")]
+        [HttpDelete("{id}/depositos/{depositoId}")]
         public IActionResult ExcluirProdutoDeposito(int depositoId, int produtoId)
         {
             try
@@ -101,6 +102,21 @@ namespace Optsol.GestaoEstoque.Controllers
             {
                 return BadRequest();
             }
+        }
+
+        [HttpPut("{id}/depositos/{depositoid}")]
+        public IActionResult TransferirProdutoDeposito(int id, int produtoId)
+        {
+            var produto = aplicacao.ObterProdutoId(produtoId);
+
+            if (produto == null || produto.Deposito == null)
+            {
+                return BadRequest();
+            }
+
+            var transferirProduto = aplicacao.TransferirProdutoDeposito(id, produtoId);
+
+            return Ok(transferirProduto);
         }
     }
 }

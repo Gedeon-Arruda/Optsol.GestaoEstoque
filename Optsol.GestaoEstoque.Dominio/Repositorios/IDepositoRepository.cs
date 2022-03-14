@@ -19,7 +19,8 @@ namespace Optsol.GestaoEstoque.Dominio.Repositorios
 
         Deposito ObterPorId(int id);
 
-        Deposito RemoverProdutoNoDeposito(Deposito produtoDeposito);
-        void SaveChanges();
+        Deposito RemoverProdutoNoDeposito(Produto produtoDeposito);
+
+        void SaveChanges();     
     }
 }

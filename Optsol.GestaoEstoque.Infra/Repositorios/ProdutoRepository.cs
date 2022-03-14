@@ -9,62 +9,71 @@ namespace Optsol.GestaoEstoque.Infra.Repositorios
 {
     public class ProdutoRepository : IProdutoRepository
     {
-        private readonly GestaoEstoqueContext context;
+        private readonly GestaoEstoqueContext _context;
 
         public ProdutoRepository(GestaoEstoqueContext context)
         {
-            this.context = context;
+            _context = context;
         }
 
         public void Inserir(Produto produto)
         {
-            context.Set<Produto>().Add(produto);
-            context.SaveChanges();
+            _context.Set<Produto>().Add(produto);
+            _context.SaveChanges();
         }
 
         public ICollection<Produto> ObterListaProduto()
         {
-            return context.Set<Produto>().Include(s => s.Deposito).ToList();
+            return _context.Set<Produto>().Include(s => s.Deposito).ToList();
         }
 
         public Produto ObterPorId(int id)
         {
-            var produto = context.Set<Produto>().FirstOrDefault(x => x.Id == id);
+            var produto = _context.Set<Produto>().FirstOrDefault(x => x.Id == id);
             return produto;
         }
 
         public Produto ObterProdutoPorCodigoVenda(string codigoVenda)
         {
-            var produto = context.Set<Produto>().FirstOrDefault(x => x.CodigoVenda == codigoVenda);
+            var produto = _context.Set<Produto>().FirstOrDefault(x => x.CodigoVenda == codigoVenda);
             return produto;
         }
 
         public ICollection<Produto> OrdenarProdutoId()
         {
-            var protudoOrdenado = context.Set<Produto>().OrderBy(x => x.Id).ThenBy(x => x.Nome).ToList();
+            var protudoOrdenado = _context.Set<Produto>().OrderBy(x => x.Id).ThenBy(x => x.Nome).ToList();
             return protudoOrdenado;
         }
 
         public Produto RemoveProdutoId(int id)
         {
-            var produto = context.Set<Produto>().FirstOrDefault(x => x.Id == id);
-            context.Remove(produto);
-            context.SaveChanges();
+            var produto = _context.Set<Produto>().Include(d => d.Deposito).FirstOrDefault(x => x.Id == id);
+            _context.Remove(produto);
+            _context.SaveChanges();
 
             return produto;
         }
 
         public void EditarProdutoId(Produto produto)
         {
-            context.Set<Produto>().Update(produto);
-            context.SaveChanges();
+            _context.Set<Produto>().Update(produto);
+            _context.SaveChanges();
         }
 
         public void RemoverProdutoDeposito(Deposito deposito)
         {
-            var produtoDeposito = context.Set<Produto>().FirstOrDefault(x => x.Id == deposito.Id);
+            var produtoDeposito = _context.Set<Produto>().FirstOrDefault(x => x.Id == deposito.Id);
             produtoDeposito.Deposito = null;
-            context.SaveChanges();
+            _context.SaveChanges();
+        }
+        public Produto TransferirProduto(int depositoId, int produtoId)
+        {
+            var transferirProduto = _context.Set<Produto>().Include(_ => _.Deposito).FirstOrDefault(x => x.Id == produtoId);
+            var deposito = _context.Set<Deposito>().FirstOrDefault(x => x.Id == depositoId);
+            transferirProduto.Deposito = deposito;
+            _context.SaveChanges();
+
+            return transferirProduto;
         }
     }
 }

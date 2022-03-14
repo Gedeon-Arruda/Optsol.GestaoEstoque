@@ -9,22 +9,22 @@ namespace Optsol.GestaoEstoque.Infra.Repositorios
 {
     public class VendaRepository : IVendaRepository
     {
-        private readonly GestaoEstoqueContext context;
+        private readonly GestaoEstoqueContext _context;
 
         public VendaRepository(GestaoEstoqueContext context)
         {
-            this.context = context;
+            _context = context;
         }
 
         public void Inserir(Venda venda)
         {
-            context.Set<Venda>().Add(venda);
-            context.SaveChanges();
+            _context.Set<Venda>().Add(venda);
+            _context.SaveChanges();
         }
 
         public ICollection<Venda> ObterTodos()
         {
-            return context.Set<Venda>().ToList();
+            return _context.Set<Venda>().ToList();
         }
     }
 }

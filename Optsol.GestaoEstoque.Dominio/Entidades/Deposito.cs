@@ -22,11 +22,5 @@ namespace Optsol.GestaoEstoque.Dominio.Entidades
             Nome = nome;
             Localizacao = localizacao;
         }
-
-        public void RemoverProdutoPorId(int produtoId)
-        {
-            var produto = Produtos.First(x => x.Id == produtoId);
-            Produtos.Remove(produto);
-        }
     }
 }

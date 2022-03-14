@@ -11,6 +11,8 @@ using Optsol.GestaoEstoque.Application.Services.Interfaces;
 using Optsol.GestaoEstoque.Dominio.Repositorios;
 using Optsol.GestaoEstoque.Infra.Data;
 using Optsol.GestaoEstoque.Infra.Repositorios;
+using System;
+using System.IO;
 
 namespace Optsol.GestaoEstoque
 {
@@ -29,7 +31,23 @@ namespace Optsol.GestaoEstoque
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Optsol.GestaoEstoque", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo
+                {
+                    Title = "Optsol.GestaoEstoque",
+                    Version = "v1",
+                    Contact = new OpenApiContact
+                    {
+                        Name = "Gedeon Arruda",
+                        Email = "gedeon.arruda@optsol.com.br",
+                        Url = new Uri("https://www.linkedin.com/in/gedeon-arruda-a37a01170/")
+                    }
+                });
+
+                var xmlFile = "Optsol.GestaoEstoque.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+
+                c.IncludeXmlComments(xmlPath);
+
             });
 
             services.AddDbContext<GestaoEstoqueContext>(options =>
@@ -55,12 +73,9 @@ namespace Optsol.GestaoEstoque
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-                app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Optsol.GestaoEstoque v1"));
-            }
+            app.UseDeveloperExceptionPage();
+            app.UseSwagger();
+            app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Optsol.GestaoEstoque v1"));
 
             app.UseHttpsRedirection();
 

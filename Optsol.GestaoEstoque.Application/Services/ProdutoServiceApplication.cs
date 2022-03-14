@@ -29,7 +29,7 @@ namespace Optsol.GestaoEstoque.Application.Services
             if (produtoExistente != null)
             {
                 throw new Exception("Codigo de venda do produto existente");
-            }            
+            }
 
             if (produtoVm.Deposito == null)
             {
@@ -43,7 +43,9 @@ namespace Optsol.GestaoEstoque.Application.Services
             var produtoComDeposito = new Produto(produtoVm.Nome, produtoVm.Preco, produtoVm.Comprador, produtoVm.CodigoVenda, deposito);
             produtoRepository.Inserir(produtoComDeposito);
 
-            return produtoComDeposito.Id;
+            var produtoVw = mapper.Map<ProdutoViewModel>(produtoComDeposito);
+
+            return produtoVw.Id;
         }
 
         public ProdutoViewModel ObterProdutoId(int id)
@@ -112,8 +114,8 @@ namespace Optsol.GestaoEstoque.Application.Services
 
             produto.Nome = produtoEditado.Nome;
             produto.Preco = produtoEditado.Preco;
-            produto.Comprador = produtoEditado.Comprador;   
-            
+            produto.Comprador = produtoEditado.Comprador;
+
             produtoRepository.EditarProdutoId(produto);
 
             var produtos = mapper.Map<ProdutoViewModel>(produto);
@@ -125,14 +127,28 @@ namespace Optsol.GestaoEstoque.Application.Services
         {
             var deposito = depositoRepository.ObterPorId(depositoId);
 
-            deposito.RemoverProdutoPorId(produtoId);
+            var excluirProduto = produtoRepository.RemoveProdutoId(deposito.Id);
 
             depositoRepository.SaveChanges();
 
-            var depositoVm = mapper.Map<DepositoViewModel>(deposito);
+            var depositoVm = mapper.Map<DepositoViewModel>(excluirProduto);
 
             return depositoVm;
+        }
 
+        public ProdutoViewModel TransferirProdutoDeposito(int depositoId, int produtoId)
+        {
+            var produto = produtoRepository.ObterPorId(produtoId);
+
+            var deposito = depositoRepository.ObterPorId(depositoId);
+
+            produto.AlterarDeposito(deposito);
+
+            depositoRepository.SaveChanges();
+
+            var produtoVw = mapper.Map<ProdutoViewModel>(produto);
+
+            return produtoVw;
         }
     }
 }
