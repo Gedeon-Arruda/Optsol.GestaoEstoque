@@ -19,16 +19,10 @@ namespace Optsol.GestaoEstoque.Controllers
 
         #region DocumentacaoAPI
 
-        /// <summary>
-        /// Buscar lista de depositos.
-        /// </summary>
-        ///
-        /// <param name="deposito"> Trazer lista de depositos </param>
-        /// <returns>Retorna um array de Depositos</returns>
-        /// <response code="200"> Sucesso </response>
-        ///
+        /// <summary> Buscar lista de depositos.</summary>
 
         #endregion DocumentacaoAPI
+
         [HttpGet]
         public IActionResult Obter()
         {
@@ -37,6 +31,7 @@ namespace Optsol.GestaoEstoque.Controllers
         }
 
         #region DocumentacaoAPI
+
         /// <summary>
         /// Cadastrar um deposito.
         /// </summary>
@@ -54,7 +49,9 @@ namespace Optsol.GestaoEstoque.Controllers
         /// <response code="200"> Sucesso </response>
         /// <response code="400"> Não foi possivel criar seu deposito </response>
         ///
+
         #endregion DocumentacaoAPI
+
         [HttpPost]
         public IActionResult SalvaDeposito(DepositoViewModel deposito)
         {
@@ -71,16 +68,10 @@ namespace Optsol.GestaoEstoque.Controllers
 
         #region DocumentacaoAPI
 
-        /// <summary>
-        /// Deletar um deposito por id.
-        /// </summary>
-        /// <param name="deposito">Insira um ID de deposito para excluir: </param>
-        /// <returns>Retorna o status.</returns>
-        /// <response code="200"> Sucesso </response>
-        /// <response code="400"> Não foi possivel excluir seu deposito </response>
-        ///
+        /// <summary> Deletar um deposito por id.</summary>
 
         #endregion DocumentacaoAPI
+
         [HttpDelete("{id}")]
         public IActionResult DeletarDeposito(int id)
         {
@@ -98,23 +89,10 @@ namespace Optsol.GestaoEstoque.Controllers
 
         #region DocumentacaoAPI
 
-        /// <summary>
-        /// Alterar um deposito por id.
-        /// </summary>
-        /// <remarks>
-        ///
-        ///{
-        ///"id": 0,
-        ///"nome": "string",
-        ///"localizacao": "string"
-        ///</remarks>
-        /// <param name="deposito">Dados do deposito: </param>
-        /// <returns>Retorna o deposito alterado.</returns>
-        /// <response code="200"> Sucesso </response>
-        /// <response code="400"> Não foi possivel alterar seu deposito </response>
-        ///
+        /// <summary>Alterar um deposito por id.</summary>
 
         #endregion DocumentacaoAPI
+
         [HttpPut("{id}")]
         public IActionResult EditarDepositoID(int id, DepositoViewModel deposito)
         {
@@ -131,17 +109,10 @@ namespace Optsol.GestaoEstoque.Controllers
 
         #region DocumentacaoAPI
 
-        /// <summary>
-        /// Busca um deposito por ID e lista os produtos nele.
-        /// </summary>
-        ///
-        /// <param name="deposito">Busca uma lista de produtos em um deposito pelo ID </param>
-        /// <returns>Retorna a lista de produtos que tem no deposito.</returns>
-        /// <response code="200"> Sucesso </response>
-        /// <response code="400"> Não foi possivel criar seu deposito </response>
-        ///
+        /// <summary>Busca um deposito por ID e lista os produtos nele.</summary>
 
         #endregion DocumentacaoAPI
+
         [HttpGet("{id}/produtos")]
         public IActionResult ObterProdutosDeposito(int id)
         {

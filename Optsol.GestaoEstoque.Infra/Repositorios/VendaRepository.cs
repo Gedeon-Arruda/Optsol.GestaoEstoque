@@ -1,7 +1,7 @@
-﻿using Optsol.GestaoEstoque.Dominio.Entidades;
+﻿using Microsoft.EntityFrameworkCore;
+using Optsol.GestaoEstoque.Dominio.Entidades;
 using Optsol.GestaoEstoque.Dominio.Repositorios;
 using Optsol.GestaoEstoque.Infra.Data;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -16,15 +16,17 @@ namespace Optsol.GestaoEstoque.Infra.Repositorios
             _context = context;
         }
 
-        public void Inserir(Venda venda)
+        public Venda Inserir(Venda venda)
         {
             _context.Set<Venda>().Add(venda);
             _context.SaveChanges();
+
+            return venda;
         }
 
         public ICollection<Venda> ObterTodos()
         {
-            return _context.Set<Venda>().ToList();
+            return _context.Set<Venda>().Include(s => s.Produtos).ToList();
         }
     }
 }

@@ -8,16 +8,16 @@ namespace Optsol.GestaoEstoque.Dominio.Entidades
         public int Id { get; set; }
         public DateTime Data { get; set; }
         public string Comprador { get; set; }
-        public ICollection<Produto> Produtos { get; set; }       
+        public ICollection<VendaProduto> Produtos { get; set; }
 
         public Venda()
         {
-            Produtos = new List<Produto>();
+            Produtos = new List<VendaProduto>();
+            Data = DateTime.Now;
         }
 
-        public Venda(DateTime data, string comprador) : this()
+        public Venda(string comprador) : this()
         {
-            Data = data;
             Comprador = comprador;
         }
     }

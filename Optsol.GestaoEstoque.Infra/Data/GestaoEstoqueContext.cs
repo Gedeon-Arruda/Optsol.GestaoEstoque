@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Optsol.GestaoEstoque.Infra.Configuracoes;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Optsol.GestaoEstoque.Infra.Data
 {

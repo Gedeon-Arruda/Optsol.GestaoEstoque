@@ -90,11 +90,11 @@ namespace Optsol.GestaoEstoque.Controllers
         }
 
         [HttpDelete("{id}/depositos/{depositoId}")]
-        public IActionResult ExcluirProdutoDeposito(int depositoId, int produtoId)
+        public IActionResult ExcluirProdutoDeposito(int depositoId, int id)
         {
             try
             {
-                var deletarProduto = aplicacao.RemoverProdutoDeposito(depositoId, produtoId);
+                var deletarProduto = aplicacao.RemoverProdutoDeposito(depositoId, id);
 
                 return Ok(deletarProduto);
             }
@@ -105,16 +105,11 @@ namespace Optsol.GestaoEstoque.Controllers
         }
 
         [HttpPut("{id}/depositos/{depositoid}")]
-        public IActionResult TransferirProdutoDeposito(int id, int produtoId)
+        public IActionResult TransferirProdutoDeposito(int id, int depositoId)
         {
-            var produto = aplicacao.ObterProdutoId(produtoId);
+            var produto = aplicacao.ObterProdutoId(id);
 
-            if (produto == null || produto.Deposito == null)
-            {
-                return BadRequest();
-            }
-
-            var transferirProduto = aplicacao.TransferirProdutoDeposito(id, produtoId);
+            var transferirProduto = aplicacao.TransferirProdutoDeposito(id, depositoId);
 
             return Ok(transferirProduto);
         }

@@ -1,7 +1,4 @@
-﻿using Optsol.GestaoEstoque.Dominio.Entidades;
-using System.Collections.Generic;
-
-namespace Optsol.GestaoEstoque.Application.ViewModels
+﻿namespace Optsol.GestaoEstoque.Application.ViewModels
 {
     public class DepositoViewModel
     {

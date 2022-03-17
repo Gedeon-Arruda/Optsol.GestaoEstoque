@@ -1,13 +1,12 @@
 ﻿using Optsol.GestaoEstoque.Application.ViewModels;
-using Optsol.GestaoEstoque.Dominio.Entidades;
 using System.Collections.Generic;
 
 namespace Optsol.GestaoEstoque.Application.Services.Interfaces
 {
     public interface IVendaServiceApplication
     {
-        int RealizarVenda(VendaViewModel venda);
+        VendasViewModel RealizarVenda(VendasViewModel vendasVw);
 
-        ICollection<VendaViewModel> GetVendaList();
+        ICollection<VendasViewModel> GetVendaList();
     }
 }

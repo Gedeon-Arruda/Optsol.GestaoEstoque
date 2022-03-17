@@ -5,7 +5,7 @@ namespace Optsol.GestaoEstoque.Dominio.Repositorios
 {
     public interface IVendaRepository
     {
-        void Inserir(Venda  venda);
+        Venda Inserir(Venda venda);
 
         ICollection<Venda> ObterTodos();
     }

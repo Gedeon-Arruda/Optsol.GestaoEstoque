@@ -4,12 +4,12 @@ using Optsol.GestaoEstoque.Dominio.Entidades;
 
 namespace Optsol.GestaoEstoque.Application.Mappers
 {
-    public class VendaMapper : Profile
+    public class VendaProdutoMapper : Profile
     {
-        public VendaMapper()
+        public VendaProdutoMapper()
         {
-            CreateMap<Venda, VendaViewModel>()
-                .ForMember(dst => dst.Data, src => src.MapFrom(x => x.Data))
+            CreateMap<Venda, VendasViewModel>()
+                .ForMember(dst => dst.Id, src => src.MapFrom(x => x.Id))
                 .ForMember(dst => dst.Comprador, src => src.MapFrom(x => x.Comprador));
         }
     }

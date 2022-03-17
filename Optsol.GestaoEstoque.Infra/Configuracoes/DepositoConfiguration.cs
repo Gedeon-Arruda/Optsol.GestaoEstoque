@@ -10,10 +10,10 @@ namespace Optsol.GestaoEstoque.Infra.Configuracoes
         {
             builder.ToTable("DEPOSITO");
 
-            builder.HasKey(t => t.Id).HasName("PK_DEPOSITO_ID");
+            builder.HasKey(t => t.Id);
             builder.Property(t => t.Id).HasColumnName("ID");
             builder.Property(x => x.Nome).HasColumnName("NOME").HasMaxLength(100).IsRequired();
-            builder.Property(X => X.Localizacao).HasColumnName("Localizacao").HasMaxLength(500).IsRequired();
+            builder.Property(X => X.Localizacao).HasColumnName("LOCALIZACAO").HasMaxLength(500).IsRequired();
             builder.HasMany(x => x.Produtos).WithOne(x => x.Deposito).HasForeignKey(x => x.DepositoId);
         }
     }

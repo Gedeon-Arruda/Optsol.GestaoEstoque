@@ -29,15 +29,15 @@ namespace Optsol.GestaoEstoque.Infra.Repositorios
 
         public Produto ObterPorId(int id)
         {
-            var produto = _context.Set<Produto>().FirstOrDefault(x => x.Id == id);
+            var produto = _context.Set<Produto>().Include(x => x.Deposito).FirstOrDefault(x => x.Id == id);
             return produto;
         }
 
-        public Produto ObterProdutoPorCodigoVenda(string codigoVenda)
-        {
-            var produto = _context.Set<Produto>().FirstOrDefault(x => x.CodigoVenda == codigoVenda);
-            return produto;
-        }
+        //public Produto ObterProdutoPorCodigoVenda(string codigoVenda)
+        //{
+        //    var produto = _context.Set<Produto>().FirstOrDefault(x => x.CodigoVenda == codigoVenda);
+        //    return produto;
+        //}
 
         public ICollection<Produto> OrdenarProdutoId()
         {
@@ -66,6 +66,7 @@ namespace Optsol.GestaoEstoque.Infra.Repositorios
             produtoDeposito.Deposito = null;
             _context.SaveChanges();
         }
+
         public Produto TransferirProduto(int depositoId, int produtoId)
         {
             var transferirProduto = _context.Set<Produto>().Include(_ => _.Deposito).FirstOrDefault(x => x.Id == produtoId);

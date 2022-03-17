@@ -60,7 +60,7 @@ namespace Optsol.GestaoEstoque.Application.Services
             }
 
             var produtos = mapper.Map<ICollection<ProdutoViewModel>>(deposito.Produtos);
-            
+
             return produtos;
         }
 
