@@ -2,17 +2,16 @@
 using Optsol.GestaoEstoque.Application.Services.Interfaces;
 using Optsol.GestaoEstoque.Application.ViewModels;
 using System;
-using System.Collections.Generic;
 
 namespace Optsol.GestaoEstoque.Controllers
 {
     [ApiController]
-    [Route("api/vendas")]
-    public class VendaController : ControllerBase
+    [Route("api/vendas-produtos")]
+    public class VendasController : ControllerBase
     {
         public IVendaServiceApplication aplicacao;
 
-        public VendaController(IVendaServiceApplication aplicacaoParametro)
+        public VendasController(IVendaServiceApplication aplicacaoParametro)
         {
             aplicacao = aplicacaoParametro;
         }
@@ -26,12 +25,13 @@ namespace Optsol.GestaoEstoque.Controllers
         }
 
         [HttpPost]
-        public IActionResult SalvaVenda(VendaViewModel vendaVw)
+        public IActionResult CriarVenda(VendaProdutoViewModel vendaVw)
         {
             try
             {
-                var id = aplicacao.RealizarVenda(vendaVw);
-                return Ok(id);
+                var venda = aplicacao.RealizarVenda(vendaVw);
+
+                return Ok(venda);
             }
             catch (Exception ex)
             {

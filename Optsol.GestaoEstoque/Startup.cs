@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using Optsol.GestaoEstoque.Application.Mappers;
 using Optsol.GestaoEstoque.Application.Services;
@@ -47,7 +46,6 @@ namespace Optsol.GestaoEstoque
                 var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
 
                 c.IncludeXmlComments(xmlPath);
-
             });
 
             services.AddDbContext<GestaoEstoqueContext>(options =>

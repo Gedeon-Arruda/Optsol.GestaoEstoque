@@ -24,23 +24,23 @@ namespace Optsol.GestaoEstoque.Application.Services
         public int CriarProduto(ProdutoViewModel produtoVm)
         {
             // transformar produtoviewmodel em produto
-            var produtoExistente = produtoRepository.ObterProdutoPorCodigoVenda(produtoVm.CodigoVenda);
+            //var produtoExistente = produtoRepository.ObterProdutoPorCodigoVenda(produtoVm.CodigoVenda);
 
-            if (produtoExistente != null)
-            {
-                throw new Exception("Codigo de venda do produto existente");
-            }
+            //if (produtoExistente != null)
+            //{
+            //    throw new Exception("Codigo de venda do produto existente");
+            //}
 
             if (produtoVm.Deposito == null)
             {
-                var produtoSemDeposito = new Produto(produtoVm.Nome, produtoVm.Preco, produtoVm.Comprador, produtoVm.CodigoVenda);
+                var produtoSemDeposito = new Produto(produtoVm.Nome, produtoVm.Preco);
                 produtoRepository.Inserir(produtoSemDeposito);
                 return produtoSemDeposito.Id;
             }
 
             var deposito = depositoRepository.ObterPorId(produtoVm.Deposito.Id);
 
-            var produtoComDeposito = new Produto(produtoVm.Nome, produtoVm.Preco, produtoVm.Comprador, produtoVm.CodigoVenda, deposito);
+            var produtoComDeposito = new Produto(produtoVm.Nome, produtoVm.Preco, deposito);
             produtoRepository.Inserir(produtoComDeposito);
 
             var produtoVw = mapper.Map<ProdutoViewModel>(produtoComDeposito);
@@ -114,7 +114,6 @@ namespace Optsol.GestaoEstoque.Application.Services
 
             produto.Nome = produtoEditado.Nome;
             produto.Preco = produtoEditado.Preco;
-            produto.Comprador = produtoEditado.Comprador;
 
             produtoRepository.EditarProdutoId(produto);
 
@@ -141,6 +140,11 @@ namespace Optsol.GestaoEstoque.Application.Services
             var produto = produtoRepository.ObterPorId(produtoId);
 
             var deposito = depositoRepository.ObterPorId(depositoId);
+
+            if (produto == null || produto.Deposito == null)
+            {
+                throw new Exception("Não foi possível localizar os dados deste produto");
+            }
 
             produto.AlterarDeposito(deposito);
 

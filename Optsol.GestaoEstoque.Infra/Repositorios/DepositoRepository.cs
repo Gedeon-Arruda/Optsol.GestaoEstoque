@@ -64,9 +64,10 @@ namespace Optsol.GestaoEstoque.Infra.Repositorios
             var obterDeposito = _context.Set<Deposito>()
                 .Include(x => x.Produtos)
                 .SingleOrDefault(x => x.Id == produtoDeposito.Id);
-                
+
             return obterDeposito;
         }
+
         public void SaveChanges()
         {
             _context.SaveChanges();

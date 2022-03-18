@@ -10,15 +10,15 @@ using Optsol.GestaoEstoque.Infra.Data;
 namespace Optsol.GestaoEstoque.Infra.Migrations
 {
     [DbContext(typeof(GestaoEstoqueContext))]
-    [Migration("20220303195857_ImplementacaoEntidadeVenda")]
-    partial class ImplementacaoEntidadeVenda
+    [Migration("20220317194540_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.14")
+                .HasAnnotation("ProductVersion", "5.0.15")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("Optsol.GestaoEstoque.Dominio.Entidades.Deposito", b =>
@@ -33,7 +33,7 @@ namespace Optsol.GestaoEstoque.Infra.Migrations
                         .IsRequired()
                         .HasMaxLength(500)
                         .HasColumnType("nvarchar(500)")
-                        .HasColumnName("Localizacao");
+                        .HasColumnName("LOCALIZACAO");
 
                     b.Property<string>("Nome")
                         .IsRequired()
@@ -41,8 +41,7 @@ namespace Optsol.GestaoEstoque.Infra.Migrations
                         .HasColumnType("nvarchar(100)")
                         .HasColumnName("NOME");
 
-                    b.HasKey("Id")
-                        .HasName("PK_DEPOSITO_ID");
+                    b.HasKey("Id");
 
                     b.ToTable("DEPOSITO");
                 });
@@ -55,18 +54,7 @@ namespace Optsol.GestaoEstoque.Infra.Migrations
                         .HasColumnName("ID")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("CodigoVenda")
-                        .ValueGeneratedOnAdd()
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)")
-                        .HasDefaultValue("11111")
-                        .HasColumnName("CODIGOVENDA");
-
-                    b.Property<string>("Comprador")
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("COMPRADOR");
-
-                    b.Property<int>("DepositoId")
+                    b.Property<int?>("DepositoId")
                         .HasColumnType("int")
                         .HasColumnName("DEPOSITOID");
 
@@ -80,8 +68,7 @@ namespace Optsol.GestaoEstoque.Infra.Migrations
                         .HasColumnType("int")
                         .HasColumnName("PRECO");
 
-                    b.HasKey("Id")
-                        .HasName("PK_PRODUTO_ID");
+                    b.HasKey("Id");
 
                     b.HasIndex("DepositoId");
 
@@ -98,33 +85,87 @@ namespace Optsol.GestaoEstoque.Infra.Migrations
 
                     b.Property<string>("Comprador")
                         .IsRequired()
-                        .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)")
-                        .HasColumnName("Comprador");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)")
+                        .HasColumnName("COMPRADOR");
 
                     b.Property<DateTime>("Data")
-                        .HasMaxLength(100)
                         .HasColumnType("datetime2")
-                        .HasColumnName("DataVenda");
+                        .HasColumnName("DATA");
 
-                    b.HasKey("Id")
-                        .HasName("PK_VENDA_ID");
+                    b.HasKey("Id");
 
                     b.ToTable("VENDA");
+                });
+
+            modelBuilder.Entity("Optsol.GestaoEstoque.Dominio.Entidades.VendaProduto", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("ID")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("ProdutoId")
+                        .HasColumnType("int")
+                        .HasColumnName("PRODUTOID");
+
+                    b.Property<int>("QuantidadeVendida")
+                        .HasColumnType("int")
+                        .HasColumnName("QUANTIDADEVENDIDA");
+
+                    b.Property<int>("VendaId")
+                        .HasColumnType("int")
+                        .HasColumnName("VENDAID");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProdutoId");
+
+                    b.HasIndex("VendaId");
+
+                    b.ToTable("VENDAPRODUTO");
                 });
 
             modelBuilder.Entity("Optsol.GestaoEstoque.Dominio.Entidades.Produto", b =>
                 {
                     b.HasOne("Optsol.GestaoEstoque.Dominio.Entidades.Deposito", "Deposito")
                         .WithMany("Produtos")
-                        .HasForeignKey("DepositoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("DepositoId");
 
                     b.Navigation("Deposito");
                 });
 
+            modelBuilder.Entity("Optsol.GestaoEstoque.Dominio.Entidades.VendaProduto", b =>
+                {
+                    b.HasOne("Optsol.GestaoEstoque.Dominio.Entidades.Produto", "Produto")
+                        .WithMany("Vendas")
+                        .HasForeignKey("ProdutoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Optsol.GestaoEstoque.Dominio.Entidades.Venda", "Venda")
+                        .WithMany("Produtos")
+                        .HasForeignKey("VendaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Produto");
+
+                    b.Navigation("Venda");
+                });
+
             modelBuilder.Entity("Optsol.GestaoEstoque.Dominio.Entidades.Deposito", b =>
+                {
+                    b.Navigation("Produtos");
+                });
+
+            modelBuilder.Entity("Optsol.GestaoEstoque.Dominio.Entidades.Produto", b =>
+                {
+                    b.Navigation("Vendas");
+                });
+
+            modelBuilder.Entity("Optsol.GestaoEstoque.Dominio.Entidades.Venda", b =>
                 {
                     b.Navigation("Produtos");
                 });

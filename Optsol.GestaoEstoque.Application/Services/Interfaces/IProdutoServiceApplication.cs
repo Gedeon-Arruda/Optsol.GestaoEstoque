@@ -18,6 +18,7 @@ namespace Optsol.GestaoEstoque.Application.Services.Interfaces
         ProdutoViewModel EditarProduto(int id, ProdutoViewModel produto);
 
         DepositoViewModel RemoverProdutoDeposito(int depositoId, int produtoId);
+
         ProdutoViewModel TransferirProdutoDeposito(int depositoId, int produtoId);
     }
 }

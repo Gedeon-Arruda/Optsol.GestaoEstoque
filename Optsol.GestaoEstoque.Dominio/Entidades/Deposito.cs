@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 
 namespace Optsol.GestaoEstoque.Dominio.Entidades
 {
@@ -8,7 +6,7 @@ namespace Optsol.GestaoEstoque.Dominio.Entidades
     {
         public int Id { get; set; }
         public string Nome { get; set; }
-        public string Localizacao { get; set; }     
+        public string Localizacao { get; set; }
 
         public ICollection<Produto> Produtos { get; private set; }
 

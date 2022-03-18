@@ -21,6 +21,6 @@ namespace Optsol.GestaoEstoque.Dominio.Repositorios
 
         Deposito RemoverProdutoNoDeposito(Produto produtoDeposito);
 
-        void SaveChanges();     
+        void SaveChanges();
     }
 }
