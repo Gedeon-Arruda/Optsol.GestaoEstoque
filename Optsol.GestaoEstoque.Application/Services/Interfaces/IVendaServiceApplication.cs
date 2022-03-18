@@ -5,8 +5,8 @@ namespace Optsol.GestaoEstoque.Application.Services.Interfaces
 {
     public interface IVendaServiceApplication
     {
-        VendasViewModel RealizarVenda(VendasViewModel vendasVw);
+        VendaProdutoViewModel RealizarVenda(VendaProdutoViewModel vendasVw);
 
-        ICollection<VendasViewModel> GetVendaList();
+        ICollection<VendaProdutoViewModel> GetVendaList();
     }
 }

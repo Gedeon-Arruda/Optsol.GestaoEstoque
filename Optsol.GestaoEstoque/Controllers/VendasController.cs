@@ -6,7 +6,7 @@ using System;
 namespace Optsol.GestaoEstoque.Controllers
 {
     [ApiController]
-    [Route("api/vendas")]
+    [Route("api/vendas-produtos")]
     public class VendasController : ControllerBase
     {
         public IVendaServiceApplication aplicacao;
@@ -25,7 +25,7 @@ namespace Optsol.GestaoEstoque.Controllers
         }
 
         [HttpPost]
-        public IActionResult CriarVenda(VendasViewModel vendaVw)
+        public IActionResult CriarVenda(VendaProdutoViewModel vendaVw)
         {
             try
             {

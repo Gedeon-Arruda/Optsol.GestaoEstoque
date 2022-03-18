@@ -19,7 +19,7 @@ namespace Optsol.GestaoEstoque.Application.Services
             this.mapper = mapper;
         }
 
-        public ICollection<VendasViewModel> GetVendaList()
+        public ICollection<VendaProdutoViewModel> GetVendaList()
         {
             var obterVendas = vendaRepository.ObterTodos();
 
@@ -28,18 +28,18 @@ namespace Optsol.GestaoEstoque.Application.Services
                 throw new Exception("Não existem vendas cadastrados");
             }
 
-            var vendas = mapper.Map<ICollection<VendasViewModel>>(obterVendas);
+            var vendas = mapper.Map<ICollection<VendaProdutoViewModel>>(obterVendas);
 
             return vendas;
         }
 
-        public VendasViewModel RealizarVenda(VendasViewModel vendasVw)
+        public VendaProdutoViewModel RealizarVenda(VendaProdutoViewModel vendasVw)
         {
-            var venda = new Venda(vendasVw.Comprador);
+            var venda = new VendaProduto(vendasVw.VendaId, vendasVw.ProdutoId, vendasVw.QuantidadeVendida);
 
             var vendas = vendaRepository.Inserir(venda);
 
-            return mapper.Map<VendasViewModel>(vendas);
+            return mapper.Map<VendaProdutoViewModel>(vendas);
         }
     }
 }

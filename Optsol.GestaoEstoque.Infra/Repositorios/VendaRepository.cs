@@ -16,17 +16,17 @@ namespace Optsol.GestaoEstoque.Infra.Repositorios
             _context = context;
         }
 
-        public Venda Inserir(Venda venda)
+        public VendaProduto Inserir(VendaProduto venda)
         {
-            _context.Set<Venda>().Add(venda);
+            _context.Set<VendaProduto>().Add(venda);
             _context.SaveChanges();
 
             return venda;
         }
 
-        public ICollection<Venda> ObterTodos()
+        public ICollection<VendaProduto> ObterTodos()
         {
-            return _context.Set<Venda>().Include(s => s.Produtos).ToList();
+            return _context.Set<VendaProduto>().Include(s => s.Produto).Include(v => v.Venda).ToList();
         }
     }
 }
