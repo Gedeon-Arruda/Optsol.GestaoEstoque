@@ -13,10 +13,6 @@ namespace Optsol.GestaoEstoque.Infra.Data
         {
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(GestaoEstoqueContext).Assembly);
 
-            //modelBuilder.ApplyConfiguration(new ProdutoConfiguration());
-            //modelBuilder.ApplyConfiguration(new DepositoConfiguration());
-            //modelBuilder.ApplyConfiguration(new VendaConfiguration());
-
             base.OnModelCreating(modelBuilder);
         }
     }

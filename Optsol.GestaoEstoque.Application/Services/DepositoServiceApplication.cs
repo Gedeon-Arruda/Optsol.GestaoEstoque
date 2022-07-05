@@ -21,7 +21,6 @@ namespace Optsol.GestaoEstoque.Application.Services
 
         public int CriarDeposito(DepositoViewModel depositoVm)
         {
-            // transformar DepositoViewModel em deposito
             var depositoExistente = depositoRepository.ObterDepositoPorNome(depositoVm.Nome);
 
             if (depositoExistente != null)

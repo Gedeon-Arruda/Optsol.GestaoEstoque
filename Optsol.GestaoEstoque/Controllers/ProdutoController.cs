@@ -6,7 +6,7 @@ using System;
 namespace Optsol.GestaoEstoque.Controllers
 {
     [ApiController]
-    [Route("api/produtos")]
+    [Route("api/[controller]")]
     public class ProdutoController : ControllerBase
     {
         public IProdutoServiceApplication aplicacao;
@@ -16,7 +16,6 @@ namespace Optsol.GestaoEstoque.Controllers
             aplicacao = aplicacaoParametro;
         }
 
-        /// <summary> Busca lista de produtos </summary>
         [HttpGet]
         public IActionResult ObterProdutos()
         {

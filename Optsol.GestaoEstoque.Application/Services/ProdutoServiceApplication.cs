@@ -23,14 +23,6 @@ namespace Optsol.GestaoEstoque.Application.Services
 
         public int CriarProduto(ProdutoViewModel produtoVm)
         {
-            // transformar produtoviewmodel em produto
-            //var produtoExistente = produtoRepository.ObterProdutoPorCodigoVenda(produtoVm.CodigoVenda);
-
-            //if (produtoExistente != null)
-            //{
-            //    throw new Exception("Codigo de venda do produto existente");
-            //}
-
             if (produtoVm.Deposito == null)
             {
                 var produtoSemDeposito = new Produto(produtoVm.Nome, produtoVm.Preco);

@@ -6,7 +6,7 @@ using System;
 namespace Optsol.GestaoEstoque.Controllers
 {
     [ApiController]
-    [Route("api/vendas-produtos")]
+    [Route("api/[controller]")]
     public class VendasController : ControllerBase
     {
         public IVendaServiceApplication aplicacao;
