@@ -7,8 +7,6 @@ namespace Optsol.GestaoEstoque.Dominio.Repositorios
     {
         void Inserir(Produto produtoDominio);
 
-        //Produto ObterProdutoPorCodigoVenda(string codigoVenda);
-
         Produto ObterPorId(int id);
 
         Produto RemoveProdutoId(int id);

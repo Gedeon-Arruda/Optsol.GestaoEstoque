@@ -7,7 +7,7 @@ using System;
 namespace Optsol.GestaoEstoque.Controllers
 {
     [ApiController]
-    [Route("api/depositos")]
+    [Route("api/[controller]")]
     public class DepositoController : ControllerBase
     {
         private readonly IDepositoServiceApplication _depositoServiceApplication;
@@ -17,40 +17,12 @@ namespace Optsol.GestaoEstoque.Controllers
             _depositoServiceApplication = depositoServiceApplication;
         }
 
-        #region DocumentacaoAPI
-
-        /// <summary> Buscar lista de depositos.</summary>
-
-        #endregion DocumentacaoAPI
-
         [HttpGet]
         public IActionResult Obter()
         {
             var depositos = _depositoServiceApplication.ObterDeposito();
             return Ok(depositos);
         }
-
-        #region DocumentacaoAPI
-
-        /// <summary>
-        /// Cadastrar um deposito.
-        /// </summary>
-        /// <remarks>
-        ///
-        /// {
-        ///"nome": "Laticínios",
-        ///"localizacao": "Doca 01"
-        ///}
-        ///</remarks>
-        ///
-        ///
-        /// <param name="deposito">Dados do deposito: </param>
-        /// <returns>Retorna o Id do Deposito Criado.</returns>
-        /// <response code="200"> Sucesso </response>
-        /// <response code="400"> Não foi possivel criar seu deposito </response>
-        ///
-
-        #endregion DocumentacaoAPI
 
         [HttpPost]
         public IActionResult SalvaDeposito(DepositoViewModel deposito)
@@ -65,12 +37,6 @@ namespace Optsol.GestaoEstoque.Controllers
                 return BadRequest(ex.Message);
             }
         }
-
-        #region DocumentacaoAPI
-
-        /// <summary> Deletar um deposito por id.</summary>
-
-        #endregion DocumentacaoAPI
 
         [HttpDelete("{id}")]
         public IActionResult DeletarDeposito(int id)
@@ -87,12 +53,6 @@ namespace Optsol.GestaoEstoque.Controllers
             }
         }
 
-        #region DocumentacaoAPI
-
-        /// <summary>Alterar um deposito por id.</summary>
-
-        #endregion DocumentacaoAPI
-
         [HttpPut("{id}")]
         public IActionResult EditarDepositoID(int id, DepositoViewModel deposito)
         {
@@ -106,12 +66,6 @@ namespace Optsol.GestaoEstoque.Controllers
                 return BadRequest();
             }
         }
-
-        #region DocumentacaoAPI
-
-        /// <summary>Busca um deposito por ID e lista os produtos nele.</summary>
-
-        #endregion DocumentacaoAPI
 
         [HttpGet("{id}/produtos")]
         public IActionResult ObterProdutosDeposito(int id)

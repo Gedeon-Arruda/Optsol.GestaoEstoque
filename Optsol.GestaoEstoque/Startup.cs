@@ -54,10 +54,6 @@ namespace Optsol.GestaoEstoque
             });
 
             services.AddAutoMapper(typeof(ProdutoMapper).Assembly);
-            //services.AddAutoMapper(typeof(DepositoMapper));
-            //services.AddAutoMapper(typeof(VendaMapper));
-
-            //services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
             services.AddScoped<IProdutoServiceApplication, ProdutoServiceApplication>();
             services.AddScoped<IDepositoServiceApplication, DepositoServiceApplication>();

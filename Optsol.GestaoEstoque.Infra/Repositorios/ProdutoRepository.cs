@@ -33,12 +33,6 @@ namespace Optsol.GestaoEstoque.Infra.Repositorios
             return produto;
         }
 
-        //public Produto ObterProdutoPorCodigoVenda(string codigoVenda)
-        //{
-        //    var produto = _context.Set<Produto>().FirstOrDefault(x => x.CodigoVenda == codigoVenda);
-        //    return produto;
-        //}
-
         public ICollection<Produto> OrdenarProdutoId()
         {
             var protudoOrdenado = _context.Set<Produto>().OrderBy(x => x.Id).ThenBy(x => x.Nome).ToList();
